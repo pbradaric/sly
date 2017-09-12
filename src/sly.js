@@ -206,8 +206,10 @@
                 slideeSize = 0;
 
                 // Iterate through items
-                $items.each(function (i, element) {
+                var _l = $items.length;
+                for (var i=0; i<_l; i++) {
                     // Item
+                    var element = $items[i];
                     var $item = $(element);
                     var rect = element.getBoundingClientRect();
                     var itemSize = round(o.horizontal ? rect.width || rect.right - rect.left : rect.height || rect.bottom - rect.top);
@@ -250,7 +252,7 @@
                     // Add item object to items array
                     items.push(item);
                     lastItem = item;
-                });
+                }
 
                 // Resize SLIDEE to fit all items
                 $slidee[0].style[o.horizontal ? 'width' : 'height'] = (borderBox ? slideeSize: slideeSize - paddingStart - paddingEnd) + 'px';
@@ -298,7 +300,9 @@
 
                 // Populate pages array
                 if (itemNav) {
-                    $.each(items, function (i, item) {
+                    var _l = items.length;
+                    for (var i=0; i<_l; i++) {
+                        var item = items[i];
                         if (forceCenteredNav) {
                             pages.push(item.center);
                         } else if (item.start + item.size > tempPagePos && tempPagePos <= pos.end) {
@@ -309,7 +313,7 @@
                                 pages.push(pos.end);
                             }
                         }
-                    });
+                    }
                 } else {
                     while (tempPagePos - frameSize < pos.end) {
                         pages.push(tempPagePos);
